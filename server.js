@@ -19,7 +19,7 @@ app.use('/posts', blogPostsRouter);
 let server;
 
 function runServer(databaseUrl=DATABASE_URL, port=PORT) {
-
+  console.log(DATABASE_URL);
   return new Promise((resolve, reject) => {
     mongoose.connect(databaseUrl, err => {
       if (err) {
@@ -42,10 +42,10 @@ function closeServer() {
      return new Promise((resolve, reject) => {
        console.log('Closing server');
        server.close(err => {
-           if (err) {
-               return reject(err);
-           }
-           resolve();
+          if (err) {
+            return reject(err);
+          }
+        resolve();
        });
      });
   });

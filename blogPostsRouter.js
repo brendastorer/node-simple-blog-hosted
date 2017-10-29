@@ -37,7 +37,7 @@ router.get('/:id', (req, res) => {
 // create a new blog post
 router.post('/', (req, res) => {
   const requiredFields = ['title', 'content'];
-  console.log(req.body);
+  console.log(req);
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
