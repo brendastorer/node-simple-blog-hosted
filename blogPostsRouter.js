@@ -4,8 +4,10 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
+const {BlogPost} = require('./models');
+
 // return all current blog posts
-router.get('/posts', (req, res) => {
+router.get('/', (req, res) => {
   BlogPost
     .find()
     .then(posts => {
@@ -20,7 +22,7 @@ router.get('/posts', (req, res) => {
 });
 
 // return one blog post by id
-router.get('posts/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   BlogPost
     .findById(req.params.id)
     .then(post => res.json(post.apiRepr()))
@@ -33,8 +35,9 @@ router.get('posts/:id', (req, res) => {
 });
 
 // create a new blog post
-router.post('/posts', (req, res) => {
-  const requiredFields = ['title', 'content', 'author'];
+router.post('/', (req, res) => {
+  const requiredFields = ['title', 'content'];
+  console.log(req.body);
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
